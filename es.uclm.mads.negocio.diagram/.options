@@ -1,0 +1,7 @@
+# Tracing options for the es.uclm.mads.negocio.diagram plug-in
+
+# Common issues
+es.uclm.mads.negocio.diagram/debug=false
+
+# Visual IDs
+es.uclm.mads.negocio.diagram/debug/visualID=false

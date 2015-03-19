@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+gmf_dashboard/domainModel=platform\:/resource/es.uclm.mads.negocio/model/negocio.ecore
+gmf_dashboard/generationModel=platform\:/resource/es.uclm.mads.negocio/model/negocio.gmfgen
+gmf_dashboard/graphicalDefinitionModel=platform\:/resource/es.uclm.mads.negocio/model/negocio.gmfgraph
+gmf_dashboard/mappingModel=platform\:/resource/es.uclm.mads.negocio/model/negocio.gmfmap
+gmf_dashboard/toolingDefinitionModel=platform\:/resource/es.uclm.mads.negocio/model/My.gmftool

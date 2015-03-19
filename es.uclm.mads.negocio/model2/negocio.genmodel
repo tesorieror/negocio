@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/negocio.emf/src"
+    modelPluginID="negocio.emf" modelName="Negocio" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>negocio.ecore</foreignModel>
+  <genPackages prefix="Negocioemf" disposableProviderFactory="true" ecorePackage="negocio.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="negocio.ecore#//TipoTransaccion">
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoTransaccion/cheque"/>
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoTransaccion/metalico"/>
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoTransaccion/transbancaria"/>
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoTransaccion/transelectronica"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="negocio.ecore#//TipoContacto">
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoContacto/telefono"/>
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoContacto/direccion"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="negocio.ecore#//TipoEnt">
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoEnt/fisica"/>
+      <genEnumLiterals ecoreEnumLiteral="negocio.ecore#//TipoEnt/juridica"/>
+    </genEnums>
+    <genClasses ecoreClass="negocio.ecore#//Documento">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference negocio.ecore#//Documento/entidad"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//Negocio">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference negocio.ecore#//Negocio/recibos"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference negocio.ecore#//Negocio/mercaderias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference negocio.ecore#//Negocio/entidades"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference negocio.ecore#//Negocio/listados"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//Entidad">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference negocio.ecore#//Entidad/documento"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference negocio.ecore#//Entidad/tipo"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference negocio.ecore#//Entidad/entidadnegocio"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//Mercaderia">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference negocio.ecore#//Mercaderia/mercaderianegocio"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//Recibo">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference negocio.ecore#//Recibo/asociado"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference negocio.ecore#//Recibo/transaccion"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference negocio.ecore#//Recibo/recibonegocio"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="negocio.ecore#//Localizable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference negocio.ecore#//Localizable/tiene"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="negocio.ecore#//Elemento">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute negocio.ecore#//Elemento/nombre"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute negocio.ecore#//Elemento/descripcion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute negocio.ecore#//Elemento/id"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//Listado">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference negocio.ecore#//Listado/mercaderias"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference negocio.ecore#//Listado/listadonegocio"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//Contacto">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute negocio.ecore#//Contacto/tipoContacto"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//TipoEntidad">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute negocio.ecore#//TipoEntidad/tipo"/>
+    </genClasses>
+    <genClasses ecoreClass="negocio.ecore#//Transaccion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute negocio.ecore#//Transaccion/tipo"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

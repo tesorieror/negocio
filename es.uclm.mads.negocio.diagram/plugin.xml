@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="negociodiag"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="negociodiag"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="true"?>
+      <editor
+         id="negocio.diagram.part.NegocioDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/NegocioDiagramFile.gif"
+         extensions="negociodiag"
+         default="true"
+         class="negocio.diagram.part.NegocioDiagramEditor"
+         matchingStrategy="negocio.diagram.part.NegocioMatchingStrategy"
+         contributorClass="negocio.diagram.part.NegocioDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="negocio.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/NegocioDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="negocio.diagram.part.NegocioCreationWizard"
+  	     id="negocio.diagram.part.NegocioCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="es.uclm.mads.negocio.diagram.InitDiagram"
+            nameFilter="*.negocio"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="negocio.diagram.part.NegocioInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="es.uclm.mads.negocio.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="NegocioPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="negocio.diagram.part.NegocioDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="save">
+               </GlobalActionId>
+            </ElementType>        
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="NegocioPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="negocio.diagram.part.NegocioDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="NegocioRender">
+         <Priority name="Lowest"/>
+         <ViewId id="negocio.diagram.part.NegocioDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="negocio.diagram.providers.NegocioMarkerNavigationProvider">
+         <MarkerType name="es.uclm.mads.negocio.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Negocio Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="negocio.diagram.providers.NegocioValidationDecoratorProvider">
+         <Priority name="Medium"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="negocio.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="true"?>
+      <page
+            id="es.uclm.mads.negocio.diagram.general"
+            name="%prefpage.es.uclm.mads.negocio.diagram.general"
+            class="negocio.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="es.uclm.mads.negocio.diagram.appearance"
+            name="%prefpage.es.uclm.mads.negocio.diagram.appearance"
+            category="es.uclm.mads.negocio.diagram.general"
+            class="negocio.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="es.uclm.mads.negocio.diagram.connections"
+            name="%prefpage.es.uclm.mads.negocio.diagram.connections"
+            category="es.uclm.mads.negocio.diagram.general"
+            class="negocio.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="es.uclm.mads.negocio.diagram.printing"
+            name="%prefpage.es.uclm.mads.negocio.diagram.printing"
+            category="es.uclm.mads.negocio.diagram.general"
+            class="negocio.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="es.uclm.mads.negocio.diagram.rulersAndGrid"
+            name="%prefpage.es.uclm.mads.negocio.diagram.rulersAndGrid"
+            category="es.uclm.mads.negocio.diagram.general"
+            class="negocio.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="es.uclm.mads.negocio.diagram"
+            labelProvider="negocio.diagram.sheet.NegocioSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="es.uclm.mads.negocio.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="es.uclm.mads.negocio.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="negocio.diagram.sheet.NegocioPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="negocio.diagram.navigator.NegocioAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="negocio.diagram.providers.NegocioViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Negocio"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,3001,3002,3003,3004"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="negocio.diagram.providers.NegocioEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="Negocio"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,3001,3002,3003,3004"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4001,4002,4003,4004"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5001,5006,5007,5008,5009,5010,5011,5012,5004,5002,5003,5005"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value="7001,7002,7003,7004,7005,7006,7007,7008,7009"/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+   
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfNegocioEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.NegocioEditPart" id="Negocio_1000"/>
+         <context elements="Negocio_1000"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfAtributoSimpleEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.AtributoSimpleEditPart" id="AtributoSimple_2001"/>
+         <context elements="AtributoSimple_2001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfPersonaEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.PersonaEditPart" id="Persona_2002"/>
+         <context elements="Persona_2002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfAtributoCompuestoEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.AtributoCompuestoEditPart" id="AtributoCompuesto_2003"/>
+         <context elements="AtributoCompuesto_2003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfValorDirectoEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.ValorDirectoEditPart" id="ValorDirecto_2004"/>
+         <context elements="ValorDirecto_2004"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfServicioEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.ServicioEditPart" id="Servicio_2005"/>
+         <context elements="Servicio_2005"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfProductoEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.ProductoEditPart" id="Producto_2006"/>
+         <context elements="Producto_2006"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfDocumentoComercialEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.DocumentoComercialEditPart" id="DocumentoComercial_2007"/>
+         <context elements="DocumentoComercial_2007"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfValorIndirectoEditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.ValorIndirectoEditPart" id="ValorIndirecto_2008"/>
+         <context elements="ValorIndirecto_2008"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfAtributoCompuesto2EditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.AtributoCompuesto2EditPart" id="AtributoCompuesto_3001"/>
+         <context elements="AtributoCompuesto_3001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfAtributoSimple2EditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.AtributoSimple2EditPart" id="AtributoSimple_3002"/>
+         <context elements="AtributoSimple_3002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfAtributoCompuesto3EditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.AtributoCompuesto3EditPart" id="AtributoCompuesto_3003"/>
+         <context elements="AtributoCompuesto_3003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="negocio.diagram.providers.assistants.NegocioModelingAssistantProviderOfAtributoSimple3EditPart">
+         <Priority name="Lowest"/>
+         <object class="negocio.diagram.edit.parts.AtributoSimple3EditPart" id="AtributoSimple_3004"/>
+         <context elements="AtributoSimple_3004"/>
+      </modelingAssistantProvider>
+      
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="negocio.diagram.providers.NegocioIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="negocio.diagram.providers.NegocioParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.Negocio_1000"
+               name="%metatype.name.Negocio_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Negocio"
+               edithelper="negocio.diagram.edit.helpers.NegocioEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.AtributoSimple_2001"
+               name="%metatype.name.AtributoSimple_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="AtributoSimple"
+               edithelper="negocio.diagram.edit.helpers.AtributoSimpleEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.Persona_2002"
+               name="%metatype.name.Persona_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Persona"
+               edithelper="negocio.diagram.edit.helpers.PersonaEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <specializationType
+               id="es.uclm.mads.negocio.diagram.AtributoCompuesto_2003"
+               name="%metatype.name.AtributoCompuesto_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="es.uclm.mads.negocio.diagram.AtributoCompuesto_3001"/>
+            <param name="semanticHint" value="2003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.ValorDirecto_2004"
+               name="%metatype.name.ValorDirecto_2004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ValorDirecto"
+               edithelper="negocio.diagram.edit.helpers.ValorDirectoEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.Servicio_2005"
+               name="%metatype.name.Servicio_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Servicio"
+               edithelper="negocio.diagram.edit.helpers.ServicioEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.Producto_2006"
+               name="%metatype.name.Producto_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Producto"
+               edithelper="negocio.diagram.edit.helpers.ProductoEditHelper">
+            <param name="semanticHint" value="2006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.DocumentoComercial_2007"
+               name="%metatype.name.DocumentoComercial_2007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DocumentoComercial"
+               edithelper="negocio.diagram.edit.helpers.DocumentoComercialEditHelper">
+            <param name="semanticHint" value="2007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.ValorIndirecto_2008"
+               name="%metatype.name.ValorIndirecto_2008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ValorIndirecto"
+               edithelper="negocio.diagram.edit.helpers.ValorIndirectoEditHelper">
+            <param name="semanticHint" value="2008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.AtributoCompuesto_3001"
+               name="%metatype.name.AtributoCompuesto_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="AtributoCompuesto"
+               edithelper="negocio.diagram.edit.helpers.AtributoCompuestoEditHelper">
+            <param name="semanticHint" value="3001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <specializationType
+               id="es.uclm.mads.negocio.diagram.AtributoSimple_3002"
+               name="%metatype.name.AtributoSimple_3002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="es.uclm.mads.negocio.diagram.AtributoSimple_2001"/>
+            <param name="semanticHint" value="3002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <specializationType
+               id="es.uclm.mads.negocio.diagram.AtributoCompuesto_3003"
+               name="%metatype.name.AtributoCompuesto_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="es.uclm.mads.negocio.diagram.AtributoCompuesto_3001"/>
+            <param name="semanticHint" value="3003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <specializationType
+               id="es.uclm.mads.negocio.diagram.AtributoSimple_3004"
+               name="%metatype.name.AtributoSimple_3004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="es.uclm.mads.negocio.diagram.AtributoSimple_2001"/>
+            <param name="semanticHint" value="3004"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <specializationType
+               id="es.uclm.mads.negocio.diagram.DocumentoComercialProducto_4001"
+               name="%metatype.name.DocumentoComercialProducto_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4001"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <specializationType
+               id="es.uclm.mads.negocio.diagram.ValorIndirectoJustificante_4002"
+               name="%metatype.name.ValorIndirectoJustificante_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <specializationType
+               id="es.uclm.mads.negocio.diagram.DocumentoComercialPersonas_4003"
+               name="%metatype.name.DocumentoComercialPersonas_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://negocio/1.0">
+         <metamodelType
+               id="es.uclm.mads.negocio.diagram.Pago_4004"
+               name="%metatype.name.Pago_4004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Pago"
+               edithelper="negocio.diagram.edit.helpers.PagoEditHelper">
+            <param name="semanticHint" value="4004"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="es.uclm.mads.negocio.diagram.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="es.uclm.mads.negocio.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="es.uclm.mads.negocio.diagram.TypeContext">
+         <elementType ref="es.uclm.mads.negocio.diagram.Negocio_1000"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.AtributoSimple_2001"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.Persona_2002"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.AtributoCompuesto_2003"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.ValorDirecto_2004"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.Servicio_2005"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.Producto_2006"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.DocumentoComercial_2007"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.ValorIndirecto_2008"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.AtributoCompuesto_3001"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.AtributoSimple_3002"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.AtributoCompuesto_3003"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.AtributoSimple_3004"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.DocumentoComercialProducto_4001"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.ValorIndirectoJustificante_4002"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.DocumentoComercialPersonas_4003"/>
+         <elementType ref="es.uclm.mads.negocio.diagram.Pago_4004"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="es.uclm.mads.negocio.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="es.uclm.mads.negocio.diagram"
+           properties="isURIEditorInput"
+           class="negocio.diagram.part.NegocioUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="es.uclm.mads.negocio.diagram.resourceContent"/>
+			<contentExtension pattern="es.uclm.mads.negocio.diagram.domainResourceContent"/>
+            <contentExtension pattern="es.uclm.mads.negocio.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="es.uclm.mads.negocio.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="es.uclm.mads.negocio.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="negocio.diagram.navigator.NegocioNavigatorContentProvider" 
+            labelProvider="negocio.diagram.navigator.NegocioNavigatorLabelProvider"
+            icon="icons/obj16/NegocioDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="negociodiag"/>
+               </and>
+               <instanceof value="negocio.diagram.navigator.NegocioAbstractNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="negocio.diagram.navigator.NegocioAbstractNavigatorItem"/>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="es.uclm.mads.negocio.diagram.navigatorSorter" 
+               class="negocio.diagram.navigator.NegocioNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="negociodiag"/>
+                  </and>
+                  <instanceof value="negocio.diagram.navigator.NegocioAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="es.uclm.mads.negocio.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="negocio.diagram.navigator.NegocioDomainNavigatorContentProvider" 
+            labelProvider="negocio.diagram.navigator.NegocioDomainNavigatorLabelProvider"
+            icon="icons/obj16/NegocioDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="negocio"/>
+               </and>
+               <instanceof value="negocio.diagram.navigator.NegocioDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="negocio.diagram.navigator.NegocioDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="es.uclm.mads.negocio.diagram.navigatorActionProvider"
+            class="negocio.diagram.navigator.NegocioNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="negocio.diagram.navigator.NegocioAbstractNavigatorItem"/>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="es.uclm.mads.negocio.diagram.navigatorLinkHelper"
+            class="negocio.diagram.navigator.NegocioNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="es.uclm.mads.negocio.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="negocio.diagram.navigator.NegocioAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.emf.validation.constraintProviders">
+      <?gmfgen generated="true"?>
+            <category id="NegocioAuditContainerId" mandatory="false" name="NegocioAuditContainer">
+         <![CDATA[Auditoria al metamodelo Negocio]]>
+      </category>
+      <category id="NegocioAuditContainerId/PersonaAuditContainerId" mandatory="false" name="PersonaAuditContainer">
+         <![CDATA[Auditoria de Persona]]>
+      </category>
+      <category id="NegocioAuditContainerId/ValorAuditContainerId" mandatory="false" name="ValorAuditContainer">
+         <![CDATA[Auditoria de Valor]]>
+      </category>
+      <category id="NegocioAuditContainerId/DocumentoComercialAuditContainerId" mandatory="false" name="DocumentoComercialAuditContainer">
+         <![CDATA[Auditar Documentos]]>
+      </category>
+      <constraintProvider cache="true">
+         <package namespaceUri="http://negocio/1.0"/>
+               <constraints categories="NegocioAuditContainerId">
+                  </constraints>
+         <constraints categories="NegocioAuditContainerId/PersonaAuditContainerId">
+                  <constraint id="IdDuplicado"
+            lang="OCL"
+            name="IdDuplicadoAuditRule"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            <![CDATA[let n:Negocio = self.negocio in 
+n.documentos->forAll(d| d<>self implies d.id<>id) and
+n.personas->forAll(d| d<>self implies d.id<>id) and
+n.productos->forAll(d| d<>self implies d.id<>id) and
+n.valores->forAll(d| d<>self implies d.id<>id)]]>
+            <description><![CDATA[Auditar Id no duplicado]]></description>
+            <message><![CDATA[El atributo id está duplicado]]></message>
+            <target class="negocio.Persona"/>
+         </constraint>
+                  <constraint id="NombrePersonaComienzaConMinuscula"
+            lang="Java" class="negocio.diagram.providers.NegocioValidationProvider$Adapter2"
+            name="NombrePrsonaComienzaConMinusculaAuditRule"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[El atributo nombre no comienza con mayuscula]]></description>
+            <message><![CDATA[El atributo nombre comienza con minuscula]]></message>
+            <target class="negocio.ElementoNombrado"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="NegocioAuditContainerId/ValorAuditContainerId">
+                  <constraint id="JustificantesComoPagosId"
+            lang="OCL"
+            name="JustificantesComoPagos"
+            mode="Live"
+            severity="ERROR" statusCode="200">
+            <![CDATA[pagos.documento->excludes(justificante)]]>
+            <description><![CDATA[Documentos de Justificantes de Pago inválidos]]></description>
+            <message><![CDATA[Los justificantes no deben ser del mismo tipo de los pagos]]></message>
+            <target class="negocio.ValorIndirecto"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="NegocioAuditContainerId/DocumentoComercialAuditContainerId">
+                  <constraint id="MezclaServicioProductoEnDocumentoComercialId"
+            lang="OCL"
+            name="MezclaServicioProductoEnDocumentoComercial"
+            mode="Live"
+            severity="ERROR" statusCode="200">
+            <![CDATA[producto->forAll(p:Producto | p.oclIsTypeOf(Producto))
+or
+producto->forAll(p:Producto | p.oclIsTypeOf(Servicio))]]>
+            <description><![CDATA[Mezcla de Servicio y Producto en DocumentoComercial]]></description>
+            <message><![CDATA[No se pueden mezclar servicios con productos]]></message>
+            <target class="negocio.DocumentoComercial"/>
+         </constraint>
+                  </constraints>
+      </constraintProvider>
+   </extension>
+
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <?gmfgen generated="true"?>
+      <clientContext default="false" id="es.uclm.mads.negocio.diagramDefaultCtx">
+         <selector class="negocio.diagram.providers.NegocioValidationProvider$DefaultCtx"/>
+      </clientContext>
+      <binding context="es.uclm.mads.negocio.diagramDefaultCtx">
+                  <constraint ref="es.uclm.mads.negocio.diagram.IdDuplicado"/>
+                  <constraint ref="es.uclm.mads.negocio.diagram.NombrePersonaComienzaConMinuscula"/>
+                  <constraint ref="es.uclm.mads.negocio.diagram.JustificantesComoPagosId"/>
+                  <constraint ref="es.uclm.mads.negocio.diagram.MezclaServicioProductoEnDocumentoComercialId"/>
+               </binding>
+
+   </extension>
+
+
+   <extension point="org.eclipse.emf.validation.ui.UIRegisteredClientContext">
+      <?gmfgen generated="true"?>
+      <clientContext id="es.uclm.mads.negocio.diagramDefaultCtx"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="negocio.diagram.part.NegocioDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="negocio.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="negocio.diagram.updateDiagram"
+         contextId="negocio.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <?gmfgen generated="true"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="es.uclm.mads.negocio.diagram.LoadResourceAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="negocio.diagram.part.NegocioDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="negocio.diagram.edit.parts.NegocioEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
+      <?gmfgen generated="true"?>
+      <category id="negocio.diagram.part.NegocioDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <command id="es.uclm.mads.negocio.diagram.LoadResourceAction"
+         name="Load Resource"
+         categoryId="negocio.diagram.part.NegocioDiagramEditorID"
+         defaultHandler="negocio.diagram.part.LoadResourceAction"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+      <?gmfgen generated="true"?>
+   </extension>
+
+   <!-- optionally, specify keybindings -->
+</plugin>
