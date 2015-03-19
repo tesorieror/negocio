@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated negocio -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="negocio.presentation.NegocioModelWizardID"
+            name="%_UI_NegocioModelWizard_label"
+            class="negocio.presentation.NegocioModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/NegocioModelFile.gif">
+         <description>%_UI_NegocioModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated negocio -->
+      <editor
+            id="negocio.presentation.NegocioEditorID"
+            name="%_UI_NegocioEditor_label"
+            icon="icons/full/obj16/NegocioModelFile.gif"
+            extensions="negocio"
+            class="negocio.presentation.NegocioEditor"
+            contributorClass="negocio.presentation.NegocioActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
